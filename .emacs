@@ -38,7 +38,9 @@
  '(fci-rule-color "#515151")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(frame-background-mode (quote dark))
- '(package-selected-packages (quote (cider color-theme-sanityinc-tomorrow ##)))
+ '(package-selected-packages
+   (quote
+    (eclim sml-mode cider color-theme-sanityinc-tomorrow ##)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -67,3 +69,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(setenv "PATH" (concat "/usr/local/smlnj/bin:" (getenv "PATH")))
+(setq exec-path (cons "/usr/local/smlnj/bin/sml"  exec-path))
+
+(require 'eclim)
+(add-hook 'java-mode-hook 'eclim-mode)
