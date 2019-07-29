@@ -40,7 +40,7 @@
  '(frame-background-mode (quote dark))
  '(package-selected-packages
    (quote
-    (eclim sml-mode cider color-theme-sanityinc-tomorrow ##)))
+    (gradle-mode eclim sml-mode cider color-theme-sanityinc-tomorrow ##)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -75,3 +75,6 @@
 
 (require 'eclim)
 (add-hook 'java-mode-hook 'eclim-mode)
+
+(require 'gradle-mode)
+(add-hook 'java-mode-hook '(lambda() (gradle-mode 1)))
