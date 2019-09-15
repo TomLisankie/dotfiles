@@ -21,8 +21,6 @@
 
 (add-to-list 'exec-path "/usr/local/bin")
 
-(load (expand-file-name "~/d/Lisp-Environment-Stuff/slime-helper.el"))
-  (setq inferior-lisp-program "/usr/local/bin/sbcl")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -73,8 +71,11 @@
 (setenv "PATH" (concat "/usr/local/smlnj/bin:" (getenv "PATH")))
 (setq exec-path (cons "/usr/local/smlnj/bin/sml"  exec-path))
 
-(require 'eclim)
-(add-hook 'java-mode-hook 'eclim-mode)
+(setq column-number-mode t)
 
-(require 'gradle-mode)
-(add-hook 'java-mode-hook '(lambda() (gradle-mode 1)))
+(defun prog-mode-header-line ()
+  "Setup the `header-line-format' on for buffers."
+  (setq header-line-format 
+        (list " " (make-string 79 ?-) "|")))
+
+(add-hook 'prog-mode-hook #'prog-mode-header-line)
