@@ -70,5 +70,7 @@
 
 (add-hook 'prog-mode-hook #'prog-mode-header-line)
 
+(setq ring-bell-function 'ignore)
+
 
 
