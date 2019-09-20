@@ -28,7 +28,7 @@
  '(frame-background-mode (quote dark))
  '(package-selected-packages
    (quote
-    (gradle-mode eclim sml-mode cider color-theme-sanityinc-tomorrow ##)))
+    (expand-region gradle-mode eclim sml-mode cider color-theme-sanityinc-tomorrow ##)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -70,5 +70,7 @@
 
 (add-hook 'prog-mode-hook #'prog-mode-header-line)
 
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 
