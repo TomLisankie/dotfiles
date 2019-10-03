@@ -28,7 +28,7 @@
  '(frame-background-mode (quote dark))
  '(package-selected-packages
    (quote
-    (expand-region gradle-mode eclim sml-mode cider color-theme-sanityinc-tomorrow ##)))
+    (magit markdown-mode expand-region gradle-mode eclim sml-mode cider color-theme-sanityinc-tomorrow ##)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -73,4 +73,12 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-
+;; scroll one line at a time (less "jumpy" than defaults)
+    
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+    
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+    
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+    
+(setq scroll-step 1) ;; keyboard scroll one line at a time
