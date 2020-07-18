@@ -1,0 +1,5 @@
+[user]
+	email = id@tomlisankie.com
+	name = Thomas Lisankie
+[credential]
+	helper = store
