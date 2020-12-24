@@ -43,6 +43,12 @@ values."
      html
      javascript
      clojure
+     tide
+     (javascript :variables
+                 javascript-backend 'tide)
+
+     (typescript :variables
+                 typescript-backend 'tide)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -372,4 +378,14 @@ you should place your code here."
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 ;; (load "hoon-mode")
 (load "ebnf-mode")
+
 (setq-default dotspacemacs-configuration-layers '(typescript))
+
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
+
+(setq create-lockfiles nil)
