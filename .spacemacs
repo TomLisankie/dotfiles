@@ -44,11 +44,13 @@ values."
      javascript
      clojure
      tide
+     prettier-js
+     prettier
      (javascript :variables
                  javascript-backend 'tide)
-
      (typescript :variables
                  typescript-backend 'tide)
+     (javascript :variables javascript-fmt-tool 'prettier)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -366,8 +368,9 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
-   '(seq csv-mode toml-mode racer pos-tip cargo rust-mode parent-mode highlight goto-chg popup sesman spinner queue pkg-info parseclj a epl bind-map packed s iedit anzu powerline smartparens undo-tree intero hlint-refactor hindent haskell-snippets company-ghci company-ghc ghc company haskell-mode cmm-mode tide typescript-mode flycheck projectile counsel swiper parseedn clojure-mode bind-key evil flx ivy avy hydra lv f dash go-guru go-eldoc go-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional cython-mode anaconda-mode pythonic phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yaml-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit transient git-commit with-editor mmm-mode markdown-toc markdown-mode gh-md web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc coffee-mode clj-refactor inflections edn multiple-cursors paredit yasnippet peg cider-eval-sexp-fu cider ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile async aggressive-indent adaptive-wrap ace-window ace-link)))
+   '(vue-html-mode vue-mode prettier-js prettier seq csv-mode toml-mode racer pos-tip cargo rust-mode parent-mode highlight goto-chg popup sesman spinner queue pkg-info parseclj a epl bind-map packed s iedit anzu powerline smartparens undo-tree intero hlint-refactor hindent haskell-snippets company-ghci company-ghc ghc company haskell-mode cmm-mode tide typescript-mode flycheck projectile counsel swiper parseedn clojure-mode bind-key evil flx ivy avy hydra lv f dash go-guru go-eldoc go-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional cython-mode anaconda-mode pythonic phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode yaml-mode smeargle orgit magit-gitflow magit-popup gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit transient git-commit with-editor mmm-mode markdown-toc markdown-mode gh-md web-mode tagedit slim-mode scss-mode sass-mode pug-mode haml-mode emmet-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc coffee-mode clj-refactor inflections edn multiple-cursors paredit yasnippet peg cider-eval-sexp-fu cider ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile async aggressive-indent adaptive-wrap ace-window ace-link)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -389,3 +392,17 @@ you should place your code here."
          (before-save . tide-format-before-save)))
 
 (setq create-lockfiles nil)
+
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+
+(setq vue-mode-packages
+      '(vue-mode))
+
+(setq vue-mode-excluded-packages '())
+
+(defun vue-mode/init-vue-mode ()
+  "Initialize my package"
+  (use-package vue-mode))
+
+(vue-mode/init-vue-mode)
